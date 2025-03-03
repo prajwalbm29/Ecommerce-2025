@@ -8,25 +8,25 @@ const registerController = async (req, res) => {
 
         // Checking validation
         if (!name) {
-            return res.status(400).json({ error: "Name is required." });
+            return res.status(400).json({ message: "Name is required." });
         }
         if (!email) {
-            return res.status(400).json({ error: "email is required." });
+            return res.status(400).json({ message: "email is required." });
         }
         if (!password) {
-            return res.status(400).json({ error: "Password is required." });
+            return res.status(400).json({ message: "Password is required." });
         }
         if (!phone) {
-            return res.status(400).json({ error: "Phone number is required." });
+            return res.status(400).json({ message: "Phone number is required." });
         }
         if (!address) {
-            return res.status(400).json({ error: "Address is required." });
+            return res.status(400).json({ message: "Address is required." });
         }
 
         // Checking existing user
         const existingUser = await userModel.findOne({ email })
         if (existingUser) {
-            return res.status(200).json({ success: true, message: "User already exist. Please login." });
+            return res.status(200).json({ success: false, message: "User already exist. Please login." });
         }
 
         // hashing password
