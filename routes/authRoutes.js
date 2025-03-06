@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { registerController, loginController } = require('../controller/authController');
+const { registerController, loginController, generateOtpController, changePasswordController } = require('../controller/authController');
 const { requireSignIn, isAdmin } = require('../middlewares/authMiddleware');
 
 // Register
@@ -13,5 +13,17 @@ router.get('/test', requireSignIn, isAdmin, (req, res) => {
     console.log("You have logged in")
     res.send("Logged in ")
 })
+
+// Protected route auth
+router.get('/user-auth', requireSignIn, (req, res) => {
+    res.status(200).json({ ok: true })
+})
+
+// Generate otp
+router.post('/generate-opt', generateOtpController);
+
+// Change password
+router.post('/change-password', changePasswordController);
+
 
 module.exports = router

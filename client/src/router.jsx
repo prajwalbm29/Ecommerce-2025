@@ -7,6 +7,9 @@ import Pagenotfound from './pages/Pagenotfound';
 import Policy from './pages/Policy';
 import Category from './pages/Category';
 import Register from './pages/Auth/Register';
+import Dashboard from './pages/User/Dashboard';
+import PrivateRoute from './components/Routes/Pivate';
+import ForgotPasssword from './pages/Auth/ForgotPassword';
 
 const router = createBrowserRouter([
     {
@@ -48,6 +51,21 @@ const router = createBrowserRouter([
         element: <Category />,
         errorElement: <Pagenotfound />
     },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute />,
+        children: [
+            {
+                path: "",
+                element: <Dashboard />
+            }
+        ]        
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPasssword />,
+        errorElement: <Pagenotfound />
+    }
 ])
 
 export default router;

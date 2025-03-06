@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
     role: {
         type: Boolean,
         default: false,
+    },
+    changePassword: {
+        otp: {
+            type: String,
+        },
+        expireAt: {
+            type: Date,
+        }
     }
 }, { timestamps: true })
 
