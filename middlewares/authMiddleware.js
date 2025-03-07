@@ -8,7 +8,7 @@ const requireSignIn = (req, res, next) => {
         next();
     } catch (error) {
         console.log("Error in require sigin middleware", error);
-        return res.status(401).json({ success:false, message: "Unauthorized. Please login."});
+        return res.status(401).json({ success: false, message: "Unauthorized. Please login." });
     }
 }
 
@@ -16,14 +16,14 @@ const isAdmin = async (req, res, next) => {
     try {
         const user = await userModel.findById(req.user._id);
         if (!user.role) {
-            return res.status(401).json({ success: false, message: "Unauthorized"});
+            return res.status(401).json({ success: false, message: "Unauthorized" });
         } else {
             next();
         }
     } catch (error) {
         console.log("Error in isAdmin middleware", error);
         return res.status(401).json({
-            success:false,
+            success: false,
             message: "Unauthorized Admin",
             error
         })

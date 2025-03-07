@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom'
-import './App.css'
 import router from './router'
 import { AuthProvider } from './Context/auth'
+import "antd/dist/reset.css";
 
 function App() {
   return (

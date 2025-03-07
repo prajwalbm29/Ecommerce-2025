@@ -62,12 +62,12 @@ const loginController = async (req, res) => {
             return res.status(401).json({ success: false, message: "Invalid credentials." })
 
         // token
-        const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = JWT.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
         res.status(200).json({
             success: true,
             message: "login successful.",
-            user: { name: user.name, email: user.email, phone: user.phone, address: user.address },
+            user: { name: user.name, email: user.email, phone: user.phone, address: user.address, role: user.role },
             token,
         })
     } catch (error) {
@@ -83,7 +83,7 @@ const generateOtpController = async (req, res) => {
             return res.status(400).json({ success: false, message: "Email is required." });
         }
         const findUser = await userModel.findOne({ email });
-        if (!findUser) return res.status(404).json({ success: false, message: "User not found." });
+        if (!findUser) return res.status(404).json({ success: false, message: "Invalid Email Id." });
         const otp = Math.floor(1000 + Math.random() * 9000).toString();
         console.log("OTP: ", otp);
 

@@ -32,7 +32,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Otp generation failed.");
+      toast.error(`${error.response.data.message}`);
     }
   }
 
@@ -58,7 +58,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(error.response.data.message);
     }
   };
   return (

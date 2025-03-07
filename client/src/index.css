@@ -108,3 +108,9 @@
   flex-direction: column;
   margin-top: 20px;
 }
+
+/* ==================== */
+.product-link {
+  text-decoration: none !important;
+  color: black !important;
+}
