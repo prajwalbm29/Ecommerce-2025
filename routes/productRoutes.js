@@ -1,4 +1,4 @@
-const { createProductController, getProductController, getSingleProductController, productPhotoController, deleteProductController, updateProductController } = require('../controller/productController');
+const { relatedProductController, productCategoryController, createProductController, getProductController, getSingleProductController, productPhotoController, deleteProductController, updateProductController, getProductFilterController, getProductCountController, getProductPerPageController, searchProductController } = require('../controller/productController');
 const { requireSignIn, isAdmin } = require('../middlewares/authMiddleware');
 const formidableMiddleware = require('express-formidable');
 
@@ -17,9 +17,27 @@ router.get("/get-product/:slug", getSingleProductController);
 router.get("/product-photo/:id", productPhotoController);
 
 // delete product
-router.delete("/delete-product", requireSignIn, isAdmin, deleteProductController);
+router.delete("/delete-product/:id", requireSignIn, isAdmin, deleteProductController);
 
 // update product
-router.post("/update-product", requireSignIn, isAdmin, formidableMiddleware(), updateProductController);
+router.put("/update-product/:id", requireSignIn, isAdmin, formidableMiddleware(), updateProductController);
+
+// filter products
+router.post("/product-filters", getProductFilterController);
+
+// product count
+router.get("/product-count", getProductCountController);
+
+// product per page
+router.get("/product-list/:page", getProductPerPageController);
+
+// search product
+router.get("/search/:keyword", searchProductController);
+
+// Related products
+router.get("/related-product/:pid/:cid", relatedProductController);
+
+// category products
+router.get("/product-category/:slug", productCategoryController);
 
 module.exports = router;

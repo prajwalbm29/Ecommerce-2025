@@ -18,10 +18,14 @@ import Users from './pages/Admin/Users';
 import Profile from './pages/User/Profile';
 import Orders from './pages/User/Orderes';
 import Products from './pages/Admin/Products';
+import UpdateProduct from './pages/Admin/UpdateProduct';
+import Search from './pages/Search';
+import ProductDetails from './pages/ProductDetails';
+import CategoryProduct from './pages/CategoryProduct';
 
 const router = createBrowserRouter([
     {
-        path:'/login',
+        path: '/login',
         element: <LoginPage />,
         errorElement: <Pagenotfound />
     },
@@ -55,8 +59,23 @@ const router = createBrowserRouter([
         errorElement: <Pagenotfound />
     },
     {
-        path: '/category',
+        path: '/categories',
         element: <Category />,
+        errorElement: <Pagenotfound />
+    },
+    {
+        path:"/category/:slug",
+        element: <CategoryProduct />,
+        errorElement: <Pagenotfound />
+    },
+    {
+        path: "/search",
+        element: <Search />,
+        errorElement: <Pagenotfound />
+    },
+    {
+        path: "product/:slug",
+        element: <ProductDetails />,
         errorElement: <Pagenotfound />
     },
     {
@@ -75,7 +94,7 @@ const router = createBrowserRouter([
                 path: "user/orders",
                 element: <Orders />
             }
-        ]        
+        ]
     },
     {
         path: '/dashboard',
@@ -100,8 +119,12 @@ const router = createBrowserRouter([
             {
                 path: "admin/products",
                 element: <Products />
+            },
+            {
+                path: "admin/product/:slug",
+                element: <UpdateProduct />
             }
-        ]        
+        ]
     },
     {
         path: '/forgot-password',
