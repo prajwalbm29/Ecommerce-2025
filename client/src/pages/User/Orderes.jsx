@@ -3,6 +3,7 @@ import UserMenu from "../../components/Layout/UserMenue";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useAuth } from "../../Context/auth";
+import { IMAGE_BASE_URL } from "../../constants/Image";
 import moment from "moment";
 
 const Orders = () => {
@@ -59,7 +60,7 @@ const Orders = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
                         <div className="col-md-4">
                           <img
-                            src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                            src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
                             className="card-img-top"
                             alt={p.name}
                             width="100px"
