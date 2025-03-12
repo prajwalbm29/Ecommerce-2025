@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
     })
 
     // defaults
-    axios.defaults.baseURL = "http://localhost:8080";
+    axios.defaults.baseURL = "https://ecommerce-2025-backend-6ebc.onrender.com";
     axios.defaults.headers.common['Authorization'] = auth?.token;
     
     useEffect(() => {
