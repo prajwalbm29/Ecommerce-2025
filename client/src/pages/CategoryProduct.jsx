@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import { useParams, useNavigate } from "react-router-dom";
-import "@/styles/CategoryProductStyles.css";
+import "../Styles/CategoryProductStyles.css";
 import axios from "axios";
 import { IMAGE_BASE_URL } from "../constants/Image";
 import { useCart } from "../Context/cart";
