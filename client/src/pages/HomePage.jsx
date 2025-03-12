@@ -4,6 +4,10 @@ import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import Prices from "../components/Prices";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/cart";
+import toast from "react-hot-toast";
+import { IMAGE_BASE_URL } from '../constants/Image';
+import '../Styles/HomePage.css'
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +17,8 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const [cart, setCart] = useCart();
 
   const navigate = useNavigate();
 
@@ -104,8 +110,18 @@ const HomePage = () => {
       console.log(error);
     }
   };
+
+
   return (
-    <Layout title={"ALl Products - Best offers "}>
+    <Layout title={"All Products - Best offers "}>
+      {/* banner image */}
+      <img
+        src="/images/banner.png"
+        className="banner-img"
+        alt="bannerimage"
+        width={"100%"}
+      />
+      {/* banner image */}
       <div className="container-fluid row mt-3">
         <div className="col-md-2">
           <h4 className="text-center">Filter By Category</h4>
@@ -145,7 +161,7 @@ const HomePage = () => {
             {products?.map((p) => (
               <div className="card m-2" style={{ width: "18rem" }}>
                 <img
-                  src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                  src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />
@@ -155,8 +171,18 @@ const HomePage = () => {
                     {p.description.substring(0, 30)}...
                   </p>
                   <p className="card-text"> $ {p.price}</p>
-                  <button class="btn btn-primary ms-1" onClick={() => navigate(`/product/${p.slug}`)}>More Details</button>
-                  <button class="btn btn-secondary ms-1">ADD TO CART</button>
+                  <button class="btn btn-primary ms-1"
+                    onClick={() => navigate(`/product/${p.slug}`)}>
+                    More Details
+                  </button>
+                  <button class="btn btn-secondary ms-1"
+                    onClick={() => {
+                      setCart([...cart, p]);
+                      localStorage.setItem("cart", JSON.stringify([...cart, p]));
+                      toast.success("Item add to cart.");
+                    }}>
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
             ))}

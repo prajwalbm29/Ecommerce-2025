@@ -22,6 +22,8 @@ import UpdateProduct from './pages/Admin/UpdateProduct';
 import Search from './pages/Search';
 import ProductDetails from './pages/ProductDetails';
 import CategoryProduct from './pages/CategoryProduct';
+import CartPage from './pages/CartPage';
+import AdminOrders from './pages/Admin/AdminOrders';
 
 const router = createBrowserRouter([
     {
@@ -56,6 +58,11 @@ const router = createBrowserRouter([
     {
         path: '/contact',
         element: <Contact />,
+        errorElement: <Pagenotfound />
+    },
+    {
+        path: '/cart',
+        element: <CartPage />,
         errorElement: <Pagenotfound />
     },
     {
@@ -115,6 +122,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/users",
                 element: <Users />
+            },
+            {
+                path: "admin/orders",
+                element: <AdminOrders />
             },
             {
                 path: "admin/products",

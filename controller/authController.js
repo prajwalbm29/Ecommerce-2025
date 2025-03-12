@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const orderModel = require('../models/orderModel');
 const JWT = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const { hashPassword, comparePassword } = require('../helpers/authHelper')
@@ -83,7 +84,7 @@ const generateOtpController = async (req, res) => {
             return res.status(400).json({ success: false, message: "Email is required." });
         }
         const findUser = await userModel.findOne({ email });
-        if (!findUser) return res.status(404).json({ success: false, message: "Invalid Email Id." });
+        if (!findUser) return res.status(404).json({ success: false, message: "Enter valid and existing Email Id." });
         const otp = Math.floor(1000 + Math.random() * 9000).toString();
         console.log("OTP: ", otp);
 
@@ -144,10 +145,75 @@ const changePasswordController = async (req, res) => {
         if (!comparePassword(otp, findUser.changePassword.otp)) return res.status(400).json({ success: false, message: "Invalid OTP." });
         const hashedNew = hashPassword(newPassword);
         await userModel.findByIdAndUpdate(findUser._id, { password: hashedNew });
-        res.status(200).json({ success:true,message:"password reset successful."})
+        res.status(200).json({ success: true, message: "password reset successful." })
     } catch (error) {
         console.log("error in change password", error);
         return res.status(500).json({ success: false, message: "Failed to change password", error });
+    }
+}
+
+const updateProfileController = async (req, res) => {
+    try {
+        const { name, email, address, password, phone } = req.body;
+        const user = await userModel.findById(req.user._id);
+        if (password && password.length < 6) {
+            return res.status(400).json({ success: false, message: "Password is required and length should be greater than six." });
+        }
+        const hashedPassword = password ? hashPassword(password) : undefined;
+        const updatedUser = await userModel.findByIdAndUpdate(req.user._id, {
+            name: name || user.name,
+            email: email || user.email,
+            address: address || user.address,
+            phone: phone || user.phone,
+            password: hashedPassword || user.password,
+            role: user.role
+        }, { new: true });
+        res.status(200).json({ success: true, message: "Profile updated successfully.", updatedUser });
+    } catch (error) {
+        console.log("Error in profile update", error);
+        res.status(500).json({ success: false, message: "Failed to update profile.", error });
+    }
+}
+
+const getOrderController = async (req, res) => {
+    try {
+        const orders = await orderModel.find({ buyer: req.user._id }).populate("products", "-photo").populate("buyer", "name");
+        res.status(200).json({ success: true, message: "Orders fetched successfully", orders });
+    } catch (error) {
+        console.log("Error in get orders", error);
+        res.status(500).json({ success: false, message: "Failed to fetch orders", error });
+    }
+}
+
+const getAllOrderController = async (req, res) => {
+    try {
+        const orders = await orderModel.find({}).populate("products", "-photo").populate("buyer", "name").sort({ createdAt: -1 });
+        res.status(200).json({ success: true, message: "Orders fetched successfully", orders });
+    } catch (error) {
+        console.log("Error in get orders", error);
+        res.status(500).json({ success: false, message: "Failed to fetch orders", error });
+    }
+}
+
+const changeOrderStatusController = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const { status } = req.body;
+        const orders = await orderModel.findByIdAndUpdate(orderId, { status }, { new: true });
+        res.json(orders);
+    } catch (error) {
+        console.log("Error in change order status", error);
+        res.status(500).json({ success: false, message: "Failed to update status", error });
+    }
+}
+
+const allUsersController = async (req, res) => {
+    try {
+        const users = await userModel.find({}).select("-changePassword");
+        res.status(200).json({ success: true, message: "All the users fetched successfully", users });
+    } catch (error) {
+        console.log("Error in all users", error);
+        res.status(500).json({ success: false, message: "Failed to fetch all the users", error });
     }
 }
 
@@ -156,5 +222,9 @@ module.exports = {
     loginController,
     generateOtpController,
     changePasswordController,
-
+    updateProfileController,
+    getOrderController,
+    getAllOrderController,
+    changeOrderStatusController,
+    allUsersController
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { registerController, loginController, generateOtpController, changePasswordController } = require('../controller/authController');
+const { allUsersController, changeOrderStatusController, getAllOrderController, getOrderController, updateProfileController, registerController, loginController, generateOtpController, changePasswordController } = require('../controller/authController');
 const { requireSignIn, isAdmin } = require('../middlewares/authMiddleware');
 
 // Register
@@ -29,6 +29,21 @@ router.post('/generate-opt', generateOtpController);
 
 // Change password
 router.post('/change-password', changePasswordController);
+
+// update profile
+router.put("/profile", requireSignIn, updateProfileController);
+
+// orders
+router.get('/orders', requireSignIn, getOrderController);
+
+// all orders
+router.get('/all-orders', requireSignIn, isAdmin, getAllOrderController);
+
+// change order status
+router.put("/order-status/:orderId", requireSignIn, isAdmin, changeOrderStatusController);
+
+// all users
+router.get("/all-users", requireSignIn, isAdmin, allUsersController);
 
 
 module.exports = router

@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { IMAGE_BASE_URL } from "../../constants/Image";
 const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -29,27 +30,25 @@ const Products = () => {
         <div className="col-md-3">
           <AdminMenu />
         </div>
-        <div className="col-md-9 ">
+        <div className="col-md-8 ">
           <h1 className="text-center">All Products List</h1>
-          <div className="d-flex">
+          <div className="row">
             {products?.map((p) => (
-              <Link
-                key={p._id}
-                to={`/dashboard/admin/product/${p.slug}`}
-                className="product-link"
-              >
-                <div className="card m-2" style={{ width: "18rem" }}>
-                  <img
-                    src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
-                    className="card-img-top"
-                    alt={p.name}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{p.name}</h5>
-                    <p className="card-text">{p.description}</p>
+              <div key={p._id} className="col-md-6 mb-3">
+                <Link to={`/dashboard/admin/product/${p.slug}`} className="product-link">
+                  <div className="card m-2" style={{ width: "18rem" }}>
+                    <img
+                      src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
+                      className="card-img-top"
+                      alt={p.name}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{p.name}</h5>
+                      <p className="card-text">{p.description}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

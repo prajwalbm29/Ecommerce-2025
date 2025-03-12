@@ -1,4 +1,4 @@
-const { relatedProductController, productCategoryController, createProductController, getProductController, getSingleProductController, productPhotoController, deleteProductController, updateProductController, getProductFilterController, getProductCountController, getProductPerPageController, searchProductController } = require('../controller/productController');
+const { relatedProductController, productCategoryController, createProductController, getProductController, getSingleProductController, productPhotoController, deleteProductController, updateProductController, getProductFilterController, getProductCountController, getProductPerPageController, searchProductController, braintreeTokenController, braintreePaymentController } = require('../controller/productController');
 const { requireSignIn, isAdmin } = require('../middlewares/authMiddleware');
 const formidableMiddleware = require('express-formidable');
 
@@ -39,5 +39,12 @@ router.get("/related-product/:pid/:cid", relatedProductController);
 
 // category products
 router.get("/product-category/:slug", productCategoryController);
+
+// payment gatway api
+// token
+router.get("/braintree/token", requireSignIn, braintreeTokenController);
+
+// payment
+router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 
 module.exports = router;
