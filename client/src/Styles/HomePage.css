@@ -5,7 +5,7 @@
   }
   
   .banner-img {
-    width: 100%;
+    width: 80%;
     height: auto;
   }
   
@@ -57,3 +57,38 @@
     margin-top: 20px;
   }
   
+  /* Product Card Hover Effect */
+.product-card {
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Hover Effect */
+.product-image {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+/* Button Hover Effect */
+.product-info button {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.product-info button:hover {
+  background-color: #ff6600;
+  color: white;
+}

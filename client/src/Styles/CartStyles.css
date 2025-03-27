@@ -1,29 +1,93 @@
+/* Cart Page */
 .cart-page {
   margin-top: 64px;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  background-color: #f8f9fa;
 }
 
+/* Header Styling */
 .cart-page h1 {
-  padding: 15px !important;
-  font-family: "roboto", sans-serif;
-  font-weight: normal;
-  background-color: rgba(0, 0, 255, 0.072) !important;
-}
-.cart-page h1 > p {
-  font-size: 20px;
-  margin-top: 10px;
+  padding: 15px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
 }
 
+/* Cart Item Styling */
 .cart-page .card {
-  padding: 5px !important;
-  height: 150px !important;
-  margin-bottom: 5px !important;
-}
-.cart-page .cart-remove-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
+
+.cart-page .card:hover {
+  transform: scale(1.02);
+}
+
+.cart-page .card img {
+  max-height: 130px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Remove Button */
+.cart-page .btn-danger {
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cart-page .btn-danger:hover {
+  background-color: #dc3545;
+  opacity: 0.8;
+}
+
+/* Cart Summary */
 .cart-page .cart-summary {
   text-align: center;
-  /* margin-top: -140px !important; */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-page .cart-summary h2 {
+  color: #333;
+  font-weight: bold;
+}
+
+.cart-page .cart-summary h4 {
+  color: #28a745;
+  font-size: 20px;
+}
+
+/* Checkout Button */
+.cart-page .btn-primary {
+  background-color: #007bff;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cart-page .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Payment Drop-in */
+#dropin-container {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 5px;
 }

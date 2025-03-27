@@ -85,75 +85,75 @@ const CartPage = () => {
     }
   };
 
-  return (
-    <Layout>
-      <div className="cart-page container">
-        <div className="row">
-          <div className="col-12 text-center bg-light p-2 mb-2">
-            <h1>{auth?.user ? `Hello ${auth.user.name}` : "Hello Guest"}</h1>
-            <p>{cart.length ? `You have ${cart.length} items in your cart.` : "Your Cart is Empty"}</p>
-          </div>
+return (
+  <Layout>
+    <div className="cart-page container">
+      <div className="row">
+        <div className="col-12 text-center bg-light p-2 mb-2">
+          <h1>{auth?.user ? `Hello ${auth.user.name}` : "Hello Guest"}</h1>
+          <p>{cart.length ? `You have ${cart.length} items in your cart.` : "Your Cart is Empty"}</p>
         </div>
-        <div className="row">
-          {/* Cart Items */}
-          <div className="col-lg-7 col-md-7 col-12">
-            {cart.map((p) => (
-              <div className="row card flex-md-row flex-column align-items-center p-2 mb-2" key={p._id}>
-                <div className="col-md-4 col-12 text-center">
-                  <img
-                    src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
-                    className="card-img-top img-fluid"
-                    alt={p.name}
-                    style={{ maxHeight: "130px", objectFit: "cover" }}
-                  />
-                </div>
-                <div className="col-md-4 col-12 text-center text-md-start">
-                  <p><strong>{p.name}</strong></p>
-                  <p>{p.description.substring(0, 30)}</p>
-                  <p>Price: {p.price}</p>
-                </div>
-                <div className="col-md-4 col-12 text-center">
-                  <button className="btn btn-danger btn-sm w-100 mt-2" onClick={() => removeCartItem(p._id)}>
-                    Remove
-                  </button>
-                </div>
+      </div>
+      <div className="row">
+        {/* Cart Items */}
+        <div className="col-lg-7 col-md-7 col-12">
+          {cart.map((p) => (
+            <div className="row card flex-md-row flex-column align-items-center p-2 mb-2" key={p._id}>
+              <div className="col-md-4 col-12 text-center">
+                <img
+                  src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
+                  className="card-img-top img-fluid"
+                  alt={p.name}
+                  style={{ maxHeight: "130px", objectFit: "cover" }}
+                />
               </div>
-            ))}
-          </div>
-          {/* Cart Summary */}
-          <div className="col-lg-5 col-md-5 col-12 cart-summary mt-3 mt-md-0">
-            <h2>Cart Summary</h2>
-            <h4>Total: {totalPrice}</h4>
-            {auth?.user?.address ? (
-              <div className="mb-3">
-                <h4>Current Address</h4>
-                <h5>{auth.user.address}</h5>
-                <button className="btn btn-outline-warning btn-sm w-100" onClick={() => navigate("/dashboard/user/profile")}>
-                  Update Address
+              <div className="col-md-4 col-12 text-center text-md-start">
+                <p><strong>{p.name}</strong></p>
+                <p>{p.description.substring(0, 30)}</p>
+                <p>Price: {p.price}</p>
+              </div>
+              <div className="col-md-4 col-12 text-center">
+                <button className="btn btn-danger btn-sm w-100 mt-2" onClick={() => removeCartItem(p._id)}>
+                  Remove
                 </button>
               </div>
-            ) : (
-              <button className="btn btn-outline-warning btn-sm w-100" onClick={() => navigate(auth?.token ? "/dashboard/user/profile" : "/login")}>
-                {auth?.token ? "Update Address" : "Please Login to Checkout"}
-              </button>
-            )}
-            {/* Payment Section */}
-            <div className="mt-2">
-              {clientToken && auth?.token && cart.length > 0 && (
-                <>
-                  <div id="dropin-container"></div>
-                  <button className="btn btn-primary btn-sm w-100 mt-2" onClick={handlePayment} disabled={loading || !instance || !auth?.user?.address}>
-                    {loading ? "Processing ..." : "Make Payment"}
-                  </button>
-                </>
-              )}
             </div>
+          ))}
+        </div>
+        {/* Cart Summary */}
+        <div className="col-lg-5 col-md-5 col-12 cart-summary mt-3 mt-md-0">
+          <h2>Cart Summary</h2>
+          <h4>Total: {totalPrice}</h4>
+          {auth?.user?.address ? (
+            <div className="mb-3">
+              <h4>Current Address</h4>
+              <h5>{auth.user.address}</h5>
+              <button className="btn btn-outline-warning btn-sm w-100" onClick={() => navigate("/dashboard/user/profile")}>
+                Update Address
+              </button>
+            </div>
+          ) : (
+            <button className="btn btn-outline-warning btn-sm w-100" onClick={() => navigate(auth?.token ? "/dashboard/user/profile" : "/login")}>
+              {auth?.token ? "Update Address" : "Please Login to Checkout"}
+            </button>
+          )}
+          {/* Payment Section */}
+          <div className="mt-2">
+            {clientToken && auth?.token && cart.length > 0 && (
+              <>
+                <div id="dropin-container"></div>
+                <button className="btn btn-primary btn-sm w-100 mt-2" onClick={handlePayment} disabled={loading || !instance || !auth?.user?.address}>
+                  {loading ? "Processing ..." : "Make Payment"}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
-    </Layout>
-  );
-  
+    </div>
+  </Layout>
+);
+
 };
 
 export default CartPage;
