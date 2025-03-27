@@ -1,81 +1,59 @@
-.banner-img {
-    margin-top: 60px;
-  }
-  
-  .home-page h1 {
-    color: gray;
-    font-family: "Playfair Display", serif;
-  }
-  
-  .home-page {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .home-page .card {
-    background-color: rgba(128, 128, 128, 0.097);
-    width: 18rem;
-  }
-  .home-page .card-name-price {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .home-page .card-price {
-    color: green;
-    font-weight: bold;
-  }
-  .home-page button {
-    border-radius: 0;
+  .banner-container {
     width: 100%;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .filter-container {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .filter-title {
     font-weight: bold;
   }
   
-  .home-page .card-text {
-    color: rgb(90, 89, 89);
+  .filter-options {
+    display: flex;
+    flex-direction: column;
   }
   
-  .home-page .card img:hover {
-    transform: scale(0.9);
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
   }
   
-  .home-page .card-img-top {
-    height: 300px !important;
-  }
-  /* ==================
-  filters
-  ============== */
-  .filters h4 {
-    margin-top: 100px;
-    color: gray !important;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.337);
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
   
-  .ant-checkbox-wrapper:first-of-type {
-    margin-left: 8px;
-  }
-  
-  .ant-checkbox-wrapper {
-    margin: 2px;
-  }
-  .ant-radio-wrapper {
-    margin-bottom: 5px !important;
-    margin-left: 10px;
-  }
-  
-  .filters button {
-    background-color: black;
+  .product-image {
     width: 100%;
-    border: none;
-    border-radius: 0;
+    border-radius: 8px;
+  }
+  
+  .product-info {
+    padding: 10px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    color: #ff9900;
+  }
+  
+  .load-more-container {
+    text-align: center;
     margin-top: 20px;
   }
   
-  .loadmore {
-    color: green;
-    font-weight: bold;
-    font-size: 20px !important;
-  }

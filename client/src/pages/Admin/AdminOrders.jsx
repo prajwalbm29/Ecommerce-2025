@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
 import AdminMenu from "../../components/Layout/AdminMenue";
 import Layout from "../../components/Layout/Layout";
 import { useAuth } from "../../Context/auth";
 import moment from "moment";
 import { Select } from "antd";
+import { IMAGE_BASE_URL } from "../../constants/Image";
 const { Option } = Select;
 
 const AdminOrders = () => {
@@ -20,7 +20,7 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
 
   const [auth] = useAuth();
-  
+
   const getOrders = async () => {
     try {
       const { data } = await axios.get("/api/v1/auth/all-orders");
@@ -94,7 +94,7 @@ const AdminOrders = () => {
                     <div className="row mb-2 p-3 card flex-row" key={p._id}>
                       <div className="col-md-4">
                         <img
-                          src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                          src={`${IMAGE_BASE_URL}/api/v1/product/product-photo/${p._id}`}
                           className="card-img-top"
                           alt={p.name}
                           width="100px"

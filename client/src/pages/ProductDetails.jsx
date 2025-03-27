@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "../styles/ProductDetailsStyles.css";
+import "../Styles/ProductDetailsStyles.css";
 import { IMAGE_BASE_URL } from "../constants/Image";
 import toast from "react-hot-toast";
 import { useCart } from "../Context/cart";
@@ -34,12 +34,14 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
   //get similar product
   const getSimilarProduct = async (pid, cid) => {
     try {
       const { data } = await axios.get(
         `/api/v1/product/related-product/${pid}/${cid}`
       );
+      console.log("Related products", data);
       setRelatedProducts(data?.products);
     } catch (error) {
       console.log(error);
