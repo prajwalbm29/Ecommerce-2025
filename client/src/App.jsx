@@ -8,7 +8,6 @@ import { CartProvider } from './Context/cart';
 
 function App() {
   return (
-
     <CategoryProvider>
       <AuthProvider>
         <SearchProvider>

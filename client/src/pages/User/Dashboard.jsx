@@ -2,21 +2,35 @@ import React from "react";
 import Layout from "../../components/Layout/Layout";
 import UserMenu from "../../components/Layout/UserMenue";
 import { useAuth } from "../../Context/auth";
+import { useNavigate } from "react-router-dom";
+import "./Dashbord.css";
 
 const Dashboard = () => {
   const [auth] = useAuth();
+  const navigate = useNavigate();
+
   return (
     <Layout title={"Dashboard - Ecommerce App"}>
-      <div className="container-flui m-3 p-3">
-        <div className="row">
-          <div className="col-md-3">
-            <UserMenu />
-          </div>
-          <div className="col-md-9">
-            <div className="card w-75 p-3">
-              <h3>{auth?.user?.name}</h3>
-              <h3>{auth?.user?.email}</h3>
-              <h3>{auth?.user?.address}</h3>
+      <div className="dashboard-container">
+        <div className="dashboard-sidebar">
+          <UserMenu />
+        </div>
+        <div className="dashboard-content">
+          <div className="dashboard-card">
+            <h2 className="dashboard-title">User Profile</h2>
+            <div className="user-info">
+              <p>
+                <strong>Name:</strong> {auth?.user?.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {auth?.user?.email}
+              </p>
+              <p>
+                <strong>Address:</strong> {auth?.user?.address || "Not Provided"}
+              </p>
+              <button className="edit-button" onClick={() => navigate("/dashboard/user/profile")}>
+                Edit Profile
+              </button>
             </div>
           </div>
         </div>
