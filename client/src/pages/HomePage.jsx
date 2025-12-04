@@ -159,7 +159,7 @@ const HomePage = () => {
                   <div className="product-info">
                     <h5>{p.name}</h5>
                     <p className="product-description">{p.description.substring(0, 50)}...</p>
-                    <p className="product-price">$ {p.price}</p>
+                    <p className="product-price">₹ {p.price}</p>
                     <button className="btn btn-primary btn-sm" onClick={() => navigate(`/product/${p.slug}`)}>
                       View Details
                     </button>
