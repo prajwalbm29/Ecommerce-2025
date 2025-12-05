@@ -20,7 +20,7 @@ const CartPage = () => {
   // Calculate total price
   const totalPrice = cart.reduce((total, item) => total + item.price, 0).toLocaleString("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
   });
 
   // Remove item from cart
